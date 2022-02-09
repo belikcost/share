@@ -1,5 +1,5 @@
 {
-  "name": "@belikcost/share-socials",
+  "name": "@belikcost/share",
   "version": "1.0.0",
   "description": "The library for create share socials buttons.",
   "main": "./src/index.ts",
