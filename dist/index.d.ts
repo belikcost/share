@@ -4,7 +4,7 @@ declare type ShareElementAttributes = {
 };
 declare type EventWithTarget = Event & {
     target: IShareElement & {
-        nodeName: "BUTTON" | "SPAN";
+        nodeName: string;
     };
 };
 declare type EventListenerCallback = EventListenerObject | ((event: EventWithTarget) => void) | null;
