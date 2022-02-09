@@ -1,8 +1,9 @@
 {
   "name": "@belikcost/share",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "The library for create share socials buttons.",
-  "main": "./src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "start": "webpack serve --mode=development",
     "build": "webpack --mode=production",

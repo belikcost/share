@@ -34,7 +34,7 @@ interface IShare {
 type ShareOptionsTitle = IShareOptions["title"];
 type ShareOptionsUrl = IShareOptions["url"];
 
-class Share implements IShare {
+export default class Share implements IShare {
     private readonly shareElements: IShareElement[];
     private readonly shared: IShared[];
     private readonly target: HTMLElement | HTMLElement[];
@@ -121,5 +121,3 @@ export type {
     EventWithTarget,
     EventListenerCallback
 };
-
-export default Share;

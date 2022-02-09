@@ -5,7 +5,7 @@ module.exports = (_env, argv) => {
     const isProduction = argv.mode === 'production';
 
     return {
-        entry: isProduction ? './src/index.ts' : { main: './src/index.ts', test: './examples/index.js' },
+        entry: isProduction ? { index: './src/index.ts' } : { index: './src/index.ts', test: './examples/index.js' },
         module: {
             rules: [
                 {
@@ -24,7 +24,11 @@ module.exports = (_env, argv) => {
         output: {
             filename: '[name].js',
             path: path.resolve(__dirname, 'dist'),
-            clean: true
+            clean: true,
+            library: {
+                name: 'Share',
+                type: 'umd',
+            },
         },
         plugins: isProduction ? [] : [
             new HtmlWebpackPlugin(

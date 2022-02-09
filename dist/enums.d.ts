@@ -1,8 +1,9 @@
-declare enum SocialTypesEnum {
+declare enum SharedTypesEnum {
     facebook = "fbButton",
     twitter = "tw",
     vkontakte = "vk",
     whatsapp = "whatsapp",
-    telegram = "telegram"
+    telegram = "telegram",
+    copy = "copy"
 }
-export { SocialTypesEnum };
+export { SharedTypesEnum };
