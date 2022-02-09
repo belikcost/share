@@ -4,7 +4,7 @@ import { SharedTypesEnum } from "../src/enums";
 const url = window.location.href;
 const title = document.title;
 
-const socials = [
+const shared = [
     {
         hintText: "Share in Twitter",
         content: "Twitter",
@@ -23,9 +23,10 @@ const socials = [
     {
         hintText: "Copy link",
         content: "Copy",
-        type: SharedTypesEnum.copy
+        type: SharedTypesEnum.copy,
+        className: "copy-link"
     }
 ];
 
-const shareSocial = new Share(document.getElementById("test"), { url, title, socials });
+const shareSocial = new Share(document.getElementById("test"), { url, title, shared });
 shareSocial.init();

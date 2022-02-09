@@ -18,12 +18,13 @@ interface IShared {
     hintText: string;
     content: string;
     type: SharedTypesEnum;
+    className?: string;
 }
 
 interface IShareOptions {
     url: string;
     title: string;
-    socials: IShared[];
+    shared: IShared[];
 }
 
 interface IShare {
@@ -35,7 +36,7 @@ type ShareOptionsUrl = IShareOptions["url"];
 
 class Share implements IShare {
     private readonly shareElements: IShareElement[];
-    private readonly socials: IShared[];
+    private readonly shared: IShared[];
     private readonly target: HTMLElement | HTMLElement[];
     private readonly curriedHandleSocialSharing: (event: EventWithTarget) => void;
 
@@ -68,9 +69,9 @@ class Share implements IShare {
         sharing[sharedType]({ title, url });
     }
 
-    constructor(target: HTMLElement | HTMLElement[], { url, title, socials }: IShareOptions) {
+    constructor(target: HTMLElement | HTMLElement[], { url, title, shared }: IShareOptions) {
         this.target = target;
-        this.socials = socials;
+        this.shared = shared;
         this.shareElements = [];
         this.curriedHandleSocialSharing = curry(Share.handleSocialSharing)(title, url);
     }
@@ -87,12 +88,13 @@ class Share implements IShare {
     }
 
     private createShareButtons(element: HTMLElement) {
-        this.socials.forEach(({ hintText, content, type }) => {
+        this.shared.forEach(({ hintText, content, type, className }) => {
             const button = document.createElement("button");
             const span = document.createElement("span");
 
             button.setAttribute("title", hintText);
             button.setAttribute("data-type", type);
+            if (className) button.setAttribute("class", className);
 
             button.append(span);
             element.append(button);
