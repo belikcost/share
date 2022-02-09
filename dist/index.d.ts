@@ -42,3 +42,4 @@ export default class Share implements IShare {
     private createShareButtons;
 }
 export type { IShareOptions, IShareElement, IShared, IShare, ShareElementAttributes, ShareOptionsUrl, ShareOptionsTitle, EventWithTarget, EventListenerCallback };
+export { SharedTypesEnum };

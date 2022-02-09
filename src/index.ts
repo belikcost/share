@@ -114,3 +114,7 @@ export type {
     EventWithTarget,
     EventListenerCallback
 };
+
+export {
+    SharedTypesEnum
+};
