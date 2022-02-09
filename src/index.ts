@@ -4,7 +4,7 @@ import { curry } from "ramda";
 import { SharedTypesEnum } from "./enums";
 
 type ShareElementAttributes = { ["data-type"]: SharedTypesEnum };
-type EventWithTarget = Event & { target: IShareElement & { nodeName: "BUTTON" | "SPAN" } };
+type EventWithTarget = Event & { target: IShareElement & { nodeName: string } };
 type EventListenerCallback = EventListenerObject | ((event: EventWithTarget) => void) | null;
 
 interface IShareElement extends Node {
@@ -38,7 +38,7 @@ export default class Share implements IShare {
     private readonly shareElements: IShareElement[];
     private readonly shared: IShared[];
     private readonly target: HTMLElement | HTMLElement[];
-    private readonly curriedHandleSocialSharing: (event: EventWithTarget) => void;
+    private readonly curriedHandleSocialSharing: (sharedType: IShared["type"]) => void;
 
     private static copyTextToClipboard(text: string) {
         const body = document.querySelector("body")!;
@@ -53,14 +53,7 @@ export default class Share implements IShare {
         textarea.remove();
     }
 
-    private static handleSocialSharing(title: ShareOptionsTitle, url: ShareOptionsUrl, event: EventWithTarget) {
-        if (event.target.nodeName === "SPAN") {
-            event.target.parentElement!.click();
-            return;
-        }
-
-        const sharedType = event.target.getAttribute("data-type");
-
+    private static handleSocialSharing(title: ShareOptionsTitle, url: ShareOptionsUrl, sharedType: IShared["type"]) {
         if (sharedType === SharedTypesEnum.copy) {
             Share.copyTextToClipboard(url);
             return;
@@ -105,7 +98,7 @@ export default class Share implements IShare {
 
             this.shareElements.push(shareButton);
 
-            shareButton.addEventListener("click", this.curriedHandleSocialSharing);
+            shareButton.addEventListener("click", () => this.curriedHandleSocialSharing(type));
         });
     }
 }
